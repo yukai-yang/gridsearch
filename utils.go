@@ -27,10 +27,10 @@ func (g Grid) String() string {
 		}
 	}
 
-	return "# returned values: \t" + fmt.Sprintf("%v", g.numReturn) +
-		"\n# go routines: " + fmt.Sprintf("%v", g.numGoRoutines) +
-		"\n# layers of the zoom-in: " + fmt.Sprintf("%v", g.zoom) +
-		"\ndecay rate of the grid sizes: " + fmt.Sprintf("%v", g.decay) +
+	return "returned values: \t\t" + fmt.Sprintf("%v", g.numReturn) +
+		"\ngo routines: \t\t\t" + fmt.Sprintf("%v", g.numGoRoutines) +
+		"\nlayers of the zoom-in: \t\t" + fmt.Sprintf("%v", g.zoom) +
+		"\ndecay rate of the grid sizes: \t" + fmt.Sprintf("%v", g.decay) +
 		"\nThe grid base is as follows:" + grid
 
 }
