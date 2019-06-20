@@ -25,9 +25,9 @@ func InitGrid(points ...[]float64) Grid {
 }
 
 //FromToBy makes a sequance of floats by some step size
-func FromToBy(from, to, by float64) ([]float64, error) {
+func FromToBy(from, to, by float64) []float64 {
 	if (to-from)*by < 0 {
-		return nil, &GridError{"The sign of 'by' is not appropriate."}
+		panic("The sign of 'by' is not appropriate.")
 	}
 
 	var length = int(math.Ceil((to-from)/by)) + 1
@@ -37,13 +37,13 @@ func FromToBy(from, to, by float64) ([]float64, error) {
 		points[i] = tmp
 		tmp += by
 	}
-	return points, nil
+	return points
 }
 
 //FromToLen makes a sequance of floats by length
-func FromToLen(from, to float64, length int) ([]float64, error) {
+func FromToLen(from, to float64, length int) []float64 {
 	if length <= 0 {
-		return nil, &GridError{"The 'length' is not appropriate."}
+		panic("The 'length' is not appropriate.")
 	}
 	var points = make([]float64, length)
 	var by = (to - from) / float64(length-1)
@@ -52,5 +52,5 @@ func FromToLen(from, to float64, length int) ([]float64, error) {
 		points[i] = tmp
 		tmp += by
 	}
-	return points, nil
+	return points
 }
