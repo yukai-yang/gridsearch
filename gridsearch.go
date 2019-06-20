@@ -34,11 +34,13 @@ func (g Grid) Dim() int {
 
 //Append appends subgrids to the grid g
 func (g *Grid) Append(points ...[]float64) {
-	length := len(g.base)
+	var tmp = make([][]float64, len(points))
 	for i, p := range points {
-		sort.Float64s(p)
-		g.base[length+i] = p
+		tmp[i] = make([]float64, len(p))
+		copy(tmp[i], p)
+		sort.Float64s(tmp[i])
 	}
+	g.base = append(g.base, tmp...)
 }
 
 //SetNumGoRoutines sets the number of go routines
