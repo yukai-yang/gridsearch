@@ -54,3 +54,13 @@ func FromToLen(from, to float64, length int) []float64 {
 	}
 	return points
 }
+
+//Rastrigin computes the Rastrigin fucntion
+func Rastrigin(x []float64) float64 {
+	var fA float64 = 10
+	var ret = float64(len(x)) * fA
+	for _, v := range x {
+		ret = ret + v*v - fA*math.Cos(2*math.Pi*v)
+	}
+	return ret
+}
