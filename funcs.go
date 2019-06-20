@@ -36,6 +36,9 @@ func FromToBy(from, to, by float64) []float64 {
 	for i := 0; i < length; i++ {
 		points[i] = tmp
 		tmp += by
+		if tmp > to {
+			tmp = to
+		}
 	}
 	return points
 }

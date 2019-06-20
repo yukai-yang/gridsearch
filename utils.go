@@ -57,9 +57,9 @@ func goEvalFunc(target func([]float64) float64, points [][]float64, numGo int) [
 	for i := 0; i < numGo; i++ {
 		go func(ii int) {
 			from := ii * size
-			to := (ii + 1) * size
-			if to >= length {
-				to = length - 1
+			to := from + size
+			if to > length {
+				to = length
 			}
 			evalFunc(target, points[from:to], values[from:to])
 			wg.Done()

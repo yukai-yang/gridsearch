@@ -6,6 +6,8 @@ import (
 )
 
 func TestInit(t *testing.T) {
+	fmt.Println("=======================")
+	fmt.Println("Results from TestInit")
 	g := InitGrid([]float64{1, 2, 3}, []float64{1, 3, 2})
 	fmt.Println(g)
 
