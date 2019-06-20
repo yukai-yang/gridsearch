@@ -90,21 +90,50 @@ func findMins(values []float64, num int) []int {
 	return ret
 }
 
+func indexadd(index []int, pos int, lengths []int) {
+	if lengths[pos]-index[pos] > 1 {
+		index[pos] = index[pos] + 1
+	} else {
+		if len(index)-pos > 1 {
+			index[pos] = 0
+			indexadd(index, pos+1, lengths)
+		}
+	}
+}
+
 func expandGrid(base [][]float64) [][]float64 {
-	var grid [][]float64
+	var width = len(base)
+	var lengths = make([]int, width)
+	var length = 1
+	for i, p := range base {
+		lengths[i] = len(p)
+		length *= lengths[i]
+	}
+	var grid = make([][]float64, length, length)
+	var index = make([]int, width, width)
+
+	for i := 0; i < length; i++ {
+		grid[i] = make([]float64, width)
+		for j := 0; j < width; j++ {
+			grid[i][j] = base[j][index[j]]
+		}
+		indexadd(index, 0, lengths)
+	}
+
 	return grid
 }
 
 //recursively grid search
 func recursiveSearch(target func([]float64) float64, base [][]float64, numGo int, zoom int, decay float64, num int) [][]float64 {
 	var ret = make([][]float64, num)
+	var grid = expandGrid(base)
 
-	var values = goEvalFunc(target, base, numGo)
+	var values = goEvalFunc(target, grid, numGo)
 	// values has been changed!
 	var tmp = findMins(values, num)
 
 	for i := 0; i < num; i++ {
-		ret[i] = base[tmp[i]]
+		ret[i] = grid[tmp[i]]
 	}
 
 	return ret
