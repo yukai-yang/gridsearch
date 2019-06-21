@@ -146,7 +146,7 @@ func recursiveSearch(target func([]float64) float64, base [][]float64, numGo int
 	//ret and val are ready
 
 	if zoom > 0 {
-		var subbase, tmpr [][]float64
+		var tmpr [][]float64
 		var tmpv []float64
 		var tmp = make([][]float64, num, num)
 		for i := 0; i < num; i++ {
@@ -155,8 +155,7 @@ func recursiveSearch(target func([]float64) float64, base [][]float64, numGo int
 		}
 
 		for _, c := range tmp {
-			subbase = buildSubBase(c, base, decay)
-			tmpr, tmpv = recursiveSearch(target, subbase, numGo, zoom-1, decay, num)
+			tmpr, tmpv = recursiveSearch(target, buildSubBase(c, base, decay), numGo, zoom-1, decay, num)
 			ret = append(ret, tmpr...)
 			val = append(val, tmpv...)
 		}
