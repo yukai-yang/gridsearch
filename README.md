@@ -1,7 +1,7 @@
 # gridsearch
 implementing the grid search with zoom algorithm by using the Go language
 
-## Test, Build and Install
+## Test, build and install
 After you have put the source code somewhere, go to the folder, and then you can run the test
 ```
 go test
@@ -76,3 +76,16 @@ And you can install
 ```
 go install
 ```
+
+## How to use the package
+
+```go
+package main
+
+import "gridsearch"
+
+func main () {
+    var g = gridsearch.InitGrid()
+    // do something ...
+}
+````
