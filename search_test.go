@@ -16,8 +16,8 @@ func TestSearch(t *testing.T) {
 	g.SetNumGoRoutines(1)
 	g.SetNumReturn(3)
 
-	var ret = g.Search(Rastrigin)
-	fmt.Println(ret)
+	var ret, val = g.Search(Rastrigin)
+	fmt.Println(ret, val)
 	fmt.Println(Rastrigin(ret[0]))
 	//fmt.Println(Rastrigin(ret[1]))
 

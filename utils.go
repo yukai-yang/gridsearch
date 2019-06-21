@@ -35,8 +35,6 @@ func (g Grid) String() string {
 
 }
 
-func buildGrid() {}
-
 //sequentially evaluate the function values
 //and store them in the input argument "values"
 func evalFunc(target func([]float64) float64, points [][]float64, values []float64) {
@@ -72,9 +70,10 @@ func goEvalFunc(target func([]float64) float64, points [][]float64, numGo int) [
 
 //find the first num smallest values in "values"
 //"values" will be changed
-func findMins(values []float64, num int) []int {
+func findMins(values []float64, num int) ([]int, []float64) {
 	var tmp = make(map[float64]int)
-	var ret = make([]int, num)
+	var index = make([]int, num)
+	var val = make([]float64, num)
 
 	for i := 0; i < len(values); i++ {
 		tmp[values[i]] = i
@@ -84,10 +83,11 @@ func findMins(values []float64, num int) []int {
 	sort.Float64s(values)
 
 	for i := 0; i < num; i++ {
-		ret[i] = tmp[values[i]]
+		val[i] = values[i]
+		index[i] = tmp[values[i]]
 	}
 
-	return ret
+	return index, val
 }
 
 func indexadd(index []int, pos int, lengths []int) {
@@ -123,18 +123,54 @@ func expandGrid(base [][]float64) [][]float64 {
 	return grid
 }
 
-//recursively grid search
-func recursiveSearch(target func([]float64) float64, base [][]float64, numGo int, zoom int, decay float64, num int) [][]float64 {
-	var ret = make([][]float64, num)
-	var grid = expandGrid(base)
+func buildSubBase(center []float64, base [][]float64, decay float64) [][]float64 {
+	var length = int(math.Ceil(float64(len(base)) * decay))
+	var subgrid = make([][]float64, length, length)
 
+	return subgrid
+}
+
+//recursively grid search
+func recursiveSearch(target func([]float64) float64, base [][]float64, numGo int, zoom int, decay float64, num int) ([][]float64, []float64) {
+	var ret = make([][]float64, num)
+	var width = len(base)
+
+	var grid = expandGrid(base)
 	var values = goEvalFunc(target, grid, numGo)
 	// values has been changed!
-	var tmp = findMins(values, num)
-
+	var mins, val = findMins(values, num)
 	for i := 0; i < num; i++ {
-		ret[i] = grid[tmp[i]]
+		ret[i] = make([]float64, width, width)
+		copy(ret[i], grid[mins[i]])
+	}
+	//ret and val are ready
+
+	if zoom > 0 {
+		var subbase, tmpr [][]float64
+		var tmpv []float64
+		var tmp = make([][]float64, num, num)
+		for i := 0; i < num; i++ {
+			tmp[i] = make([]float64, width, width)
+			copy(tmp[i], ret[i])
+		}
+
+		for _, c := range tmp {
+			subbase = buildSubBase(c, base, decay)
+			tmpr, tmpv = recursiveSearch(target, subbase, numGo, zoom-1, decay, num)
+			ret = append(ret, tmpr...)
+			val = append(val, tmpv...)
+		}
+
+		mins, val = findMins(val, num)
+		tmp = make([][]float64, num, num)
+		for i := 0; i < num; i++ {
+			tmp[i] = make([]float64, width, width)
+			copy(tmp[i], ret[mins[i]])
+		}
+
+		ret = tmp
+
 	}
 
-	return ret
+	return ret, val
 }

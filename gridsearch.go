@@ -83,8 +83,6 @@ func (g *Grid) SetNumReturn(num int) error {
 }
 
 //Search implements the grid search algorithm
-func (g Grid) Search(target func([]float64) float64) [][]float64 {
-	var par [][]float64
-	par = recursiveSearch(target, g.base, g.numGoRoutines, g.zoom, g.decay, g.numReturn)
-	return par
+func (g Grid) Search(target func([]float64) float64) ([][]float64, []float64) {
+	return recursiveSearch(target, g.base, g.numGoRoutines, g.zoom, g.decay, g.numReturn)
 }
