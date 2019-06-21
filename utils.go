@@ -124,10 +124,30 @@ func expandGrid(base [][]float64) [][]float64 {
 }
 
 func buildSubBase(center []float64, base [][]float64, decay float64) [][]float64 {
-	var length = int(math.Ceil(float64(len(base)) * decay))
-	var subgrid = make([][]float64, length, length)
+	var subbase = make([][]float64, len(base), len(base))
+	var from, to float64
+	var pos int
+	for i := 0; i < len(subbase); i++ {
+		pos = 0
+		for ; pos < len(base[i]); pos++ {
+			if center[i] == base[i][pos] {
+				break
+			}
+		}
+		if pos == 0 {
+			from = base[i][pos]
+		} else {
+			from = base[i][pos-1]
+		}
+		if pos == len(base[i])-1 {
+			to = base[i][pos]
+		} else {
+			to = base[i][pos+1]
+		}
+		subbase[i] = FromToLen(from, to, int(math.Ceil(float64(len(base[i]))*decay)))
+	}
 
-	return subgrid
+	return subbase
 }
 
 //recursively grid search
