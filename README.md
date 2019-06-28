@@ -46,7 +46,7 @@ type GridSearcher interface {
 ```
 
 
-## Test, build and install
+## Tests
 After you have put the source code somewhere, go to the folder, and then you can run the test
 ```
 go test
