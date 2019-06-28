@@ -145,6 +145,16 @@ For the benchmark, run
 go test -run=XXX -bench=.
 ```
 
+and settings are
+```go
+g := InitGrid()
+var tmp = FromToBy(-5.12, 5.12, .1)
+g.Append(tmp, tmp)
+g.SetNumGoRoutines(1)
+g.SetZoom(2)
+g.SetNumReturn(2)
+```
+
 and you get
 ```
 goos: darwin
