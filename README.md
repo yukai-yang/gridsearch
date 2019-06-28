@@ -82,7 +82,7 @@ go install
 ```go
 package main
 
-import "gridsearch"
+import "github/yukai-yang/gridsearch"
 
 func main () {
     var g = gridsearch.InitGrid()
