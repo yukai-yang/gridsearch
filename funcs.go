@@ -8,8 +8,8 @@ import (
 )
 
 //InitGrid initializes the grid
-func InitGrid(points ...[]float64) Grid {
-	var g = Grid{}
+func InitGrid(points ...[]float64) *Grid {
+	var g = &Grid{}
 	g.base = make([][]float64, len(points))
 	for i, p := range points {
 		var tmp = make([]float64, len(p))

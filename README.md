@@ -7,7 +7,7 @@ implementing the grid search with zoom algorithm by using the Go language
 
 ```go
 //InitGrid initializes the grid
-func InitGrid(points ...[]float64) Grid
+func InitGrid(points ...[]float64) *Grid
 ```
 
 ```go
