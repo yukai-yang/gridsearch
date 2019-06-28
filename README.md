@@ -1,6 +1,51 @@
 # gridsearch
 implementing the grid search with zoom algorithm by using the Go language
 
+## About the package
+
+### Exported functions
+
+```go
+//InitGrid initializes the grid
+func InitGrid(points ...[]float64) Grid
+```
+
+```go
+//FromToBy makes a sequance of floats by some step size
+func FromToBy(from, to, by float64) []float64
+```
+
+```go
+//FromToLen makes a sequance of floats by length
+func FromToLen(from, to float64, length int) []float64
+```
+
+```go
+//Rastrigin computes the Rastrigin fucntion
+func Rastrigin(x []float64) float64
+```
+
+### Exported struct and interface
+
+```go
+type Grid struct {
+//private stuff
+}
+```
+
+```go
+type GridSearcher interface {
+	Dim() int
+	Append(...[]float64)
+	SetNumGoRoutines(int) error
+	SetZoom(int) error
+	SetDecay(float64) error
+	SetNumReturn(int) error
+	Search(func([]float64) float64) [][]float64
+}
+```
+
+
 ## Test, build and install
 After you have put the source code somewhere, go to the folder, and then you can run the test
 ```
@@ -66,15 +111,6 @@ results:
 4.8816196116518995e-06
 PASS
 ok      gridsearch      0.012s
-```
-You can build
-```
-go build
-```
-
-And you can install
-```
-go install
 ```
 
 ## How to use the package
