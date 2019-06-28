@@ -25,7 +25,7 @@ func FromToLen(from, to float64, length int) []float64
 func Rastrigin(x []float64) float64
 ```
 
-### Exported struct and interface
+### Exported struct and its methods
 
 ```go
 type Grid struct {
@@ -34,15 +34,42 @@ type Grid struct {
 ```
 
 ```go
-type GridSearcher interface {
-	Dim() int
-	Append(...[]float64)
-	SetNumGoRoutines(int) error
-	SetZoom(int) error
-	SetDecay(float64) error
-	SetNumReturn(int) error
-	Search(func([]float64) float64) [][]float64
-}
+//Dim gets the number of parameters or arguments
+func (g Grid) Dim() int
+```
+
+```go
+//Append appends subgrids to the grid g
+func (g *Grid) Append(points ...[]float64)
+```
+
+```go
+//SetNumGoRoutines sets the number of go routines
+func (g *Grid) SetNumGoRoutines(num int) error
+```
+
+```go
+//SetZoom sets the zoom
+//number of (additional) rounds or layers of the zoom-in
+func (g *Grid) SetZoom(zoom int) error
+```
+
+```go
+//SetDecay sets the decay
+//representing the decay rate of the grid sizes of the zoom
+func (g *Grid) SetDecay(decay float64) error
+```
+
+```go
+//SetNumReturn sets the number of points to return
+//i.e. the smallest points, 1 by default the minimum.
+func (g *Grid) SetNumReturn(num int) error
+```
+
+The last and most important one
+```go
+//Search implements the grid search algorithm
+func (g Grid) Search(target func([]float64) float64) ([][]float64, []float64)
 ```
 
 
@@ -112,6 +139,22 @@ results:
 PASS
 ok      gridsearch      0.012s
 ```
+
+For the benchmark, run
+```
+go test -run=XXX -bench=.
+```
+
+and you get
+```
+goos: darwin
+goarch: amd64
+pkg: gridsearch
+BenchmarkGridSearch-4                300           5224740 ns/op
+PASS
+ok      gridsearch      2.100s
+```
+for 300 times only 2.1 seconds.
 
 ## How to use the package
 

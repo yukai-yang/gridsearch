@@ -33,5 +33,4 @@ func TestSearch(t *testing.T) {
 	fmt.Println(ret, val)
 	fmt.Println(Rastrigin(ret[0]))
 	//fmt.Println(Rastrigin(ret[1]))
-
 }

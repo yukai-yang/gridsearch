@@ -16,17 +16,6 @@ type Grid struct {
 	numReturn     int
 }
 
-//GridSearcher is an interface defining the functions
-type GridSearcher interface {
-	Dim() int
-	Append(...[]float64)
-	SetNumGoRoutines(int) error
-	SetZoom(int) error
-	SetDecay(float64) error
-	SetNumReturn(int) error
-	Search(func([]float64) float64) [][]float64
-}
-
 //Dim gets the number of parameters or arguments
 func (g Grid) Dim() int {
 	return len(g.base)
