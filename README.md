@@ -145,7 +145,7 @@ For the benchmark, run
 go test -run=XXX -bench=.
 ```
 
-and settings are
+and the settings are
 ```go
 g := InitGrid()
 var tmp = FromToBy(-5.12, 5.12, .1)
