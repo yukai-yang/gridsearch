@@ -31,7 +31,7 @@ func Rastrigin(x []float64) float64
 
 ```go
 type Grid struct {
-//private stuff
+// contains filtered or unexported fields
 }
 ```
 
