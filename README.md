@@ -166,7 +166,7 @@ ok      gridsearch      2.100s
 ```
 for 300 times sequentially within only 2.1 seconds. This can be compared with the last example in
 
-[https://github.com/yukai-yang/zoomgrid]
+[zoomgrid package in R](https://github.com/yukai-yang/zoomgrid)
 
 which runs only once by using 4 cores on the same computer.
 
