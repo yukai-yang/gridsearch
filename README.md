@@ -164,7 +164,11 @@ BenchmarkGridSearch-4                300           5224740 ns/op
 PASS
 ok      gridsearch      2.100s
 ```
-for 300 times only 2.1 seconds.
+for 300 times sequentially only 2.1 seconds. This can be compared with the last example in
+
+[https://github.com/yukai-yang/zoomgrid]
+
+which runs only once by using 4 cores on the same computer.
 
 ## How to use the package
 
