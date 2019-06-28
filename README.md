@@ -1,5 +1,7 @@
 # gridsearch
-implementing the grid search with zoom algorithm by using the Go language
+implementing the grid search with zoom algorithm by using the Go language.
+
+This example shows that we can do efficient scientific computation by using Go.
 
 ## About the package
 
