@@ -155,7 +155,7 @@ g.SetZoom(2)
 g.SetNumReturn(2)
 ```
 
-and you get
+I get
 ```
 goos: darwin
 goarch: amd64
@@ -164,7 +164,7 @@ BenchmarkGridSearch-4                300           5224740 ns/op
 PASS
 ok      gridsearch      2.100s
 ```
-for 300 times sequentially only 2.1 seconds. This can be compared with the last example in
+for 300 times sequentially within only 2.1 seconds. This can be compared with the last example in
 
 [https://github.com/yukai-yang/zoomgrid]
 
